@@ -58,12 +58,12 @@
   </div>
 </div>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 22px; color: #0f5132; border-left: 5px solid #28a745; padding-left: 12px; margin-top: 30px;">
+<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 30px; color: #0f5132; padding-left: 12px; margin-top: 30px;">
   1. Introduction
 </h2><br>
 ![Amazon e-commerce](images/intro_picture.png)
-<div style="background-color: #f0fdf4; border-left: 6px solid #34d399; padding: 16px; border-radius: 10px; font-family: 'Segoe UI', sans-serif; color: #2f3e46;">
-  <p style="font-size: 16px; line-height: 1.6; margin: 0;">
+<div style=" border-left: 6px solid #34d399; padding: 16px; border-radius: 10px; font-family: 'Segoe UI', sans-serif; color: #2f3e46;">
+  <p style="font-size: 25px; line-height: 1.6; margin: 0;">
     <strong>Amazon</strong> is a global e-commerce and technology giant that has transformed the way people shop, with a focus on fast and efficient delivery.
     Through its innovative logistics network, Amazon offers next-day and same-day delivery, making it a leader in the industry.
     The company leverages cutting-edge technologies, including advanced algorithms, data structures, and machine learning,
