@@ -81,4 +81,31 @@
     we can see how algorithmic thinking directly translates into impactful engineering solutions at scale.
   </p>
 </div>
+<h2 style="color:#2e8b57; text-align:center; margin-bottom: 30px;">Business Cases</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; font-family: sans-serif;">
+
+  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">1. Product Search & Discovery</h3>
+  </div>
+
+  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">2. Inventory & Warehouse Managemen</h3>
+    <p>Stacks, queues, and scheduling algorithms to manage stock and optimize order fulfillment.</p>
+  </div>
+
+  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">3. Delivery & Logistics</h3>
+  </div>
+
+  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">4. Recommendation System</h3>
+  </div>
+
+  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">5. Order Processing System</h3>
+    <p>Queues, hash maps, and transaction algorithms ensure fast and reliable order placement and tracking.</p>
+  </div>
+
+</div>
 
