@@ -62,7 +62,7 @@
   1. Introduction
 </h2><br>
 ![Amazon e-commerce](images/intro_picture.png)
-<div style=" border-left: 6px solid blue; padding: 16px; border-radius: 10px; font-family: 'Segoe UI', sans-serif; color: #2f3e46;">
+<div style=" border-left: 6px solid #43a047;; padding: 16px; border-radius: 10px; font-family: 'Segoe UI', sans-serif; color: #2f3e46;">
   <p style="font-size: 22px; line-height: 1.6; margin: 0;">
     <strong>Amazon</strong> is a global e-commerce and technology giant that has transformed the way people shop, with a focus on fast and efficient delivery.
     Through its innovative logistics network, Amazon offers next-day and same-day delivery, making it a leader in the industry.
@@ -70,13 +70,13 @@
     to optimize its supply chain and improve the overall customer experience.
   </p>
 </div>
-<div style=" padding: 18px; border-radius: 10px; border-left: 5px solid blue;">
-  <p style="font-size: 22px; line-height: 1.6; margin: 0;">
+<div style=" padding: 18px; border-radius: 10px; border-left: 6px solid #43a047;;">
+  <p style="font-size: 22px;">
     Amazon’s operations handle billions of transactions and logistics decisions every day. 
     To maintain speed, accuracy, and scalability, the company relies heavily on efficient data structures and advanced algorithms.
     This makes it an ideal real-world environment to apply and demonstrate concepts learned in DSA and Advanced Problem Solving.
   </p>
- <p style="font-size: 22px; line-height: 1.6; margin: 0;">
+ <p style="font-size: 22px; ">
     By studying Amazon’s core systems—like product search, delivery routing, inventory optimization, and recommendation engines— 
     we can see how algorithmic thinking directly translates into impactful engineering solutions at scale.
   </p>
