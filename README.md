@@ -34,12 +34,11 @@
     text-align: left;
   ">
     <h2 style="color: #2e7d32; margin-top: 0;">Academic Info</h2>
-    <p style="font-size: 16px; color: #37474f;">
-      I'm <strong>Swati Bhat</strong>, currently pursuing <strong>Computer Science and Engineering</strong> at <em>XYZ College</em>.
-    </p>
-    <p style="font-size: 15px; color: #546e7a;">
-      Passionate about <strong>Web Development</strong> and <strong>Problem Solving</strong>. Always excited to explore new technologies.
-    </p>
+   <p style="font-size: 16px; color: #37474f;">
+  I am Swati Bhat, a 6th semester student at KLE Technological University, with a CGPA of 9.08.  
+  I am eager to apply my learning in Data Structures and Algorithms (DSA) and Advanced Problem Solving (APS) to real-world applications to solve complex problems and building efficient solutions.
+</p>
+
   </div>
 
   <!-- Domain Info Card -->
@@ -54,11 +53,7 @@
   ">
     <h2 style="color: #558b2f; margin-top: 0;">Project Domain</h2>
     <p style="font-size: 16px; color: #37474f;">
-      This portfolio explores the algorithms used in the <strong>Amazon Delivery System</strong>. 
-      It includes route optimization, warehouse management, search, and recommendations.
-    </p>
-    <p style="font-size: 15px; color: #546e7a;">
-      Real-world use cases are explained using core DSA concepts in a simple and creative way.
+     I chose Amazon to apply my learning in advanced algorithms and data structures to improve the speed and efficiency of its services. This domain allows me to demonstrate the practical use of DSA and APS concepts to solve real-world problems and enhance user experience within Amazon's system.
     </p>
   </div>
 
