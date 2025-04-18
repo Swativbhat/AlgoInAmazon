@@ -91,7 +91,6 @@
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
     <h3 style="color:#2e8b57;">2. Inventory & Warehouse Managemen</h3>
-    <p>Stacks, queues, and scheduling algorithms to manage stock and optimize order fulfillment.</p>
   </div>
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
@@ -104,7 +103,6 @@
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
     <h3 style="color:#2e8b57;">5. Order Processing System</h3>
-    <p>Queues, hash maps, and transaction algorithms ensure fast and reliable order placement and tracking.</p>
   </div>
 
 </div>
