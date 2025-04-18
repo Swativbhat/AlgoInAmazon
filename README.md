@@ -12,7 +12,7 @@
   ">
     <h1 style="margin-top: 0; color: #2e7d32; font-size: 2.4em;">Swati Bhat</h1>
     <p style="font-size: 18px; font-weight: 500; margin: 10px 0;">
-      Computer Science and Engineering Student at <em>KLE TECH</em>
+      Computer Science and Engineering Student at KLE TECH
     </p>
     <p style="font-size: 16px; line-height: 1.6; max-width: 90%; margin: 18px auto 0;">
       Passionate about Web Development and Problem Solving <br> 
@@ -71,12 +71,12 @@
   </p>
 </div>
 <div style=" padding: 18px; border-radius: 10px; border-left: 6px solid #43a047;">
-  <p style="font-size: 22px;">
+  <p style="font-size: 22px;color: #37474f;">
     Amazon’s operations handle billions of transactions and logistics decisions every day. 
     To maintain speed, accuracy, and scalability, the company relies heavily on efficient data structures and advanced algorithms.
     This makes it an ideal real-world environment to apply and demonstrate concepts learned in DSA and Advanced Problem Solving.
   </p>
- <p style="font-size: 22px; ">
+ <p style="font-size: 22px;color: #37474f; ">
     By studying Amazon’s core systems—like product search, delivery routing, inventory optimization, and recommendation engines— 
     we can see how algorithmic thinking directly translates into impactful engineering solutions at scale.
   </p>
@@ -85,28 +85,28 @@
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; font-family: sans-serif;">
 
-  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  <div style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
     <h3 style="color:black;">1. Product Search & Discovery</h3>
   </div>
 
-  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">2. Inventory & Warehouse Management</h3>
+  <div style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:black;">2. Inventory & Warehouse Management</h3>
   </div>
 
-  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">3. Delivery & Logistics</h3>
+  <div style="padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:black;;">3. Delivery & Logistics</h3>
   </div>
 
-  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">4. Recommendation System</h3>
+  <div style=" padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:black;">4. Recommendation System</h3>
   </div>
 
-  <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">5. Order Processing System</h3>
+  <div style=" padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:black;">5. Order Processing System</h3>
   </div>
 
-   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">6.Pricing and discounts </h3>
+   <div style=" padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:black;">6.Pricing and discounts </h3>
   </div>
 
 </div>
