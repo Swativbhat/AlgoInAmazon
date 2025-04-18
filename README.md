@@ -56,6 +56,16 @@
      I chose Amazon to apply my learning in advanced algorithms and data structures to improve the speed and efficiency of its services. This domain allows me to demonstrate the practical use of DSA and APS concepts to solve real-world problems and enhance user experience within Amazon's system.
     </p>
   </div>
+</div>
 
+##Introduction
+[Amazon e-commerce](images/intro_picture.jpeg)
+<div style="background-color: #f0fdf4; border-left: 6px solid #34d399; padding: 16px; border-radius: 10px; font-family: 'Segoe UI', sans-serif; color: #2f3e46;">
+  <p style="font-size: 16px; line-height: 1.6; margin: 0;">
+    <strong>Amazon</strong> is a global e-commerce and technology giant that has transformed the way people shop, with a focus on fast and efficient delivery.
+    Through its innovative logistics network, Amazon offers next-day and same-day delivery, making it a leader in the industry.
+    The company leverages cutting-edge technologies, including advanced algorithms, data structures, and machine learning,
+    to optimize its supply chain and improve the overall customer experience.
+  </p>
 </div>
 
