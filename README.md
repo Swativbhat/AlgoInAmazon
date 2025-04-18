@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 30px; color: #0f5132; padding-left: 12px; margin-top: 30px;">
+<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 30px; color:blue; padding-left: 12px; margin-top: 30px;">
   1. Introduction
 </h2><br>
 ![Amazon e-commerce](images/intro_picture.png)
