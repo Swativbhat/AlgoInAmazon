@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 30px; color:blue; padding-left: 12px; margin-top: 30px;">
+<h2 style="font-family: 'Segoe UI', sans-serif; font-size: 30px; color:green; padding-left: 12px; margin-top: 30px;">
   1. Introduction
 </h2><br>
 ![Amazon e-commerce](images/intro_picture.png)
@@ -81,16 +81,16 @@
     we can see how algorithmic thinking directly translates into impactful engineering solutions at scale.
   </p>
 </div>
-<h2 style="color:#2e8b57; text-align:center; margin-bottom: 30px;">Business Cases</h2>
+<h2 style="color:green; text-align:center; margin-bottom: 30px;font-size:25px;">Business Cases</h2>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; font-family: sans-serif;">
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">1. Product Search & Discovery</h3>
+    <h3 style="color:black;">1. Product Search & Discovery</h3>
   </div>
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <h3 style="color:#2e8b57;">2. Inventory & Warehouse Managemen</h3>
+    <h3 style="color:#2e8b57;">2. Inventory & Warehouse Management</h3>
   </div>
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
@@ -103,6 +103,10 @@
 
   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
     <h3 style="color:#2e8b57;">5. Order Processing System</h3>
+  </div>
+
+   <div style="background-color: #d5f5dc; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <h3 style="color:#2e8b57;">6.Pricing and discounts </h3>
   </div>
 
 </div>
