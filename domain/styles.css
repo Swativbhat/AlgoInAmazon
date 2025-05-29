@@ -317,3 +317,9 @@ font-size:1.2em ;
   color: #cccccc;
   line-height: 1.6;
 }
+
+.case-card a{
+  font-size: 1em;
+  color: #cccccc;
+  line-height: 1.6;
+}
