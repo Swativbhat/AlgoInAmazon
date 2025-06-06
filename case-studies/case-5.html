@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case-Study1</title>
+    <title>Case-Study5</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -285,19 +285,105 @@
 
     <section id="case-studies-section" class="case-study-container">
       <h2 class="case-study-title">
+        Autocomplete of Searches
         <i class="fas fa-briefcase"></i>
       </h2>
 
-      <h2 class="case-study-title"><i class="fas fa-check-circle"></i> 1.</h2>
+      <h2 class="case-study-title">
+        <i class="fas fa-check-circle"></i> 1.Trie
+      </h2>
 
-      <p class="case-study-text"></p>
-      <img src="" alt="Case study visual" class="case-study-image" />
+      <p class="case-study-text">
+        A trie is an excellent data structure for implementing search
+        autocomplete because it allows efficient storage and retrieval of words
+        sharing common prefixes. It enables prefix-based searching by quickly
+        traversing down the tree to find potential completions. This makes it
+        ideal for providing instant, relevant suggestions as the user types.
+      </p>
+      <img
+        src="../images/case-5.png"
+        alt="Case study visual"
+        class="case-study-image"
+        height="400px"
+      />
 
       <h2>Code:</h2>
       <pre class="code-block"><code>
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
 
+class TrieNode {
+public:
+    TrieNode *children[26];
+    bool isLeaf;
 
+    TrieNode() {
+        isLeaf = false;
+        for (int i = 0; i &lt; 26; i++) {
+            children[i] = nullptr;
+        }
+    }
+};
 
+void insert(TrieNode *root, const string &amp;key) {
+    TrieNode *curr = root;
+    for (char c : key) {
+        if (curr-&gt;children[c - 'a'] == nullptr) {
+            TrieNode *newNode = new TrieNode();
+            curr-&gt;children[c - 'a'] = newNode;
+        }
+        curr = curr-&gt;children[c - 'a'];
+    }
+    curr-&gt;isLeaf = true;
+}
+
+bool search(TrieNode *root, const string &amp;key) {
+    if (root == nullptr) return false;
+    TrieNode *curr = root;
+    for (char c : key) {
+        if (curr-&gt;children[c - 'a'] == nullptr)
+            return false;
+        curr = curr-&gt;children[c - 'a'];
+    }
+    return curr-&gt;isLeaf;
+}
+
+bool isPrefix(TrieNode *root, const string &amp;prefix) {
+    TrieNode *curr = root;
+    for (char c : prefix) {
+        if (curr-&gt;children[c - 'a'] == nullptr)
+            return false;
+        curr = curr-&gt;children[c - 'a'];
+    }
+    return true;
+}
+
+int main() {
+    TrieNode *root = new TrieNode();
+    vector&lt;string&gt; arr = {"and", "ant", "do", "dad"};
+    for (const string &amp;s : arr) {
+        insert(root, s);
+    }
+
+    vector&lt;string&gt; searchKeys = {"do", "gee", "bat"};
+    for (string &amp;s : searchKeys) {
+        if (search(root, s))
+            cout &lt;&lt; "true ";
+        else
+            cout &lt;&lt; "false ";
+    }
+    cout &lt;&lt; "\n";
+
+    vector&lt;string&gt; prefixKeys = {"ge", "ba", "do", "de"};
+    for (string &amp;s : prefixKeys) {
+        if (isPrefix(root, s))
+            cout &lt;&lt; "true ";
+        else
+            cout &lt;&lt; "false ";
+    }
+
+    return 0;
+}
   </code></pre>
       <div class="complexity-card">
         <h3 class="card-title">Time Complexity</h3>
@@ -305,23 +391,37 @@
           <thead>
             <tr>
               <th>Operation</th>
-              <th>Complexity</th>
+              <th>Average</th>
+              <th>Worst Case</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
+              <td>Search</td>
+              <td>O(n)</td>
+              <td>O(n)</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>Insert</td>
+              <td>O(n)</td>
+              <td>O(n)</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>Delete</td>
+              <td>O(n)</td>
+              <td>O(n)</td>
             </tr>
           </tbody>
+        </table>
+      </div>
+
+      <div class="complexity-card">
+        <h3 class="card-title">Space Complexity</h3>
+        <table class="complexity-table">
+          <tr>
+            <td>Space</td>
+            <td>O(n)</td>
+          </tr>
         </table>
       </div>
 
@@ -329,17 +429,27 @@
         <h3 class="reference-title">References</h3>
         <ul class="reference-list">
           <li>
-            <a href="" target="_blank" class="reference-link"></a>
+            <a
+              href="https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014"
+              target="_blank"
+              class="reference-link"
+              >https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014</a
+            >
           </li>
           <li>
-            <a href="" target="_blank" class="reference-link"></a>
+            <a
+              href="https://www.geeksforgeeks.org/trie-insert-and-search/"
+              target="_blank"
+              class="reference-link"
+              >https://www.geeksforgeeks.org/trie-insert-and-search/</a
+            >
           </li>
         </ul>
       </div>
 
       <div class="case-study-navigation">
-        <a></a>
-        <a href="case-2.html" class="nav-link">Next Case Study →</a>
+        <a href="case-4.html" class="nav-link">← Previous Case Study</a>
+        <a href="case-6.html" class="nav-link">Next Case Study →</a>
       </div>
     </section>
   </body>

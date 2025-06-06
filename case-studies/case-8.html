@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case-Study2</title>
+    <title>Case-Study1</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -275,7 +275,7 @@
               >Case studies</a
             >
           </li>
-          <li><a href="../index.html/#contact" class="menu-btn">Details</a></li>
+          <li><a href="#contact" class="menu-btn">Details</a></li>
         </ul>
         <div class="menu-btn">
           <i class="fas fa-bars"></i>
@@ -285,138 +285,112 @@
 
     <section id="case-studies-section" class="case-study-container">
       <h2 class="case-study-title">
-        <i class="fas fa-briefcase"></i> Data Clustering Products into
-        Categories
+        <i class="fas fa-briefcase"></i>
+        Product Recommendations
       </h2>
+
       <h2 class="case-study-title">
-        <i class="fas fa-check-circle"></i> 1.KD Tress
+        <i class="fas fa-check-circle"></i> 1.Hash Maps
       </h2>
 
       <p class="case-study-text">
-        KD-Trees can be used in product filtering and browsing to quickly find
-        and group similar products based on numerical features (e.g., price,
-        rating, vector embeddings). They optimize search operations by reducing
-        the time to locate relevant products within large datasets.
+        Hash maps can store user purchase histories to quickly retrieve their
+        interactions and track the frequency of products bought by similar
+        users, making it easier to suggest relevant items in product
+        recommendations.
       </p>
       <img
-        src="../images/case-2.jpg"
+        src="../images/case-8.png"
         alt="Case study visual"
         class="case-study-image"
+        height="400px"
+      />
+      <img
+        src="../images/case-8.2.png"
+        alt="Case study visual"
+        class="case-study-image"
+        height="400px"
       />
 
       <h2>Code:</h2>
       <pre class="code-block"><code>
 #include &lt;iostream&gt;
-#include &lt;array&gt;
-#include &lt;cmath&gt;
-using namespace std;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;set&gt;
+#include &lt;algorithm&gt;
 
-template &lt;size_t K&gt;
-class KDTree {
-private:
-    struct Node {
-        array&lt;double, K&gt; point;
-        Node* left;
-        Node* right;
-        Node(const array&lt;double, K&gt;&amp; pt) : point(pt), left(nullptr), right(nullptr) {}
-    };
+using UserID = std::string;
+using ProductID = std::string;
 
-    Node* root;
-
-    Node* insertRecursive(Node* node, const array&lt;double, K&gt;&amp; point, int depth) {
-        if (node == nullptr) return new Node(point);
-        int cd = depth % K;
-        if (point[cd] &lt; node-&gt;point[cd])
-            node-&gt;left = insertRecursive(node-&gt;left, point, depth + 1);
-        else
-            node-&gt;right = insertRecursive(node-&gt;right, point, depth + 1);
-        return node;
-    }
-
-    bool searchRecursive(Node* node, const array&lt;double, K&gt;&amp; point, int depth) const {
-        if (node == nullptr) return false;
-        if (node-&gt;point == point) return true;
-        int cd = depth % K;
-        if (point[cd] &lt; node-&gt;point[cd])
-            return searchRecursive(node-&gt;left, point, depth + 1);
-        else
-            return searchRecursive(node-&gt;right, point, depth + 1);
-    }
-
-    void printRecursive(Node* node, int depth) const {
-        if (node == nullptr) return;
-        for (int i = 0; i &lt; depth; i++) cout &lt;&lt; "  ";
-        cout &lt;&lt; "(";
-        for (size_t i = 0; i &lt; K; i++) {
-            cout &lt;&lt; node-&gt;point[i];
-            if (i &lt; K - 1) cout &lt;&lt; ", ";
-        }
-        cout &lt;&lt; ")" &lt;&lt; endl;
-        printRecursive(node-&gt;left, depth + 1);
-        printRecursive(node-&gt;right, depth + 1);
-    }
-
-public:
-    KDTree() : root(nullptr) {}
-
-    void insert(const array&lt;double, K&gt;&amp; point) {
-        root = insertRecursive(root, point, 0);
-    }
-
-    bool search(const array&lt;double, K&gt;&amp; point) const {
-        return searchRecursive(root, point, 0);
-    }
-
-    void print() const {
-        printRecursive(root, 0);
-    }
+std::unordered_map&lt;UserID, std::set&lt;ProductID&gt;&gt; userPurchases = {
+    {"User1", {"prodA", "prodB", "prodC"}},
+    {"User2", {"prodB", "prodC", "prodD"}},
+    {"User3", {"prodA", "prodE"}},
+    {"User4", {"prodF", "prodB"}},
 };
 
+std::vector&lt;ProductID&gt; recommendProducts(const UserID&amp; user, int topN = 3) {
+    const auto&amp; userItems = userPurchases[user];
+    std::unordered_map&lt;ProductID, int&gt; recommendedCounts;
+
+    for (const auto&amp; [otherUser, otherItems] : userPurchases) {
+        if (otherUser == user) continue;
+
+        for (const auto&amp; prod : otherItems) {
+            if (userItems.count(prod) == 0) {
+                recommendedCounts[prod]++;
+            }
+        }
+    }
+
+    std::vector&lt;std::pair&lt;ProductID, int&gt;&gt; sortedRecs(recommendedCounts.begin(), recommendedCounts.end());
+    std::sort(sortedRecs.begin(), sortedRecs.end(),
+              [](const auto&amp; a, const auto&amp; b) { return a.second &gt; b.second; });
+
+    std::vector&lt;ProductID&gt; recommendations;
+    for (int i = 0; i &lt; (int)sortedRecs.size() &amp;&amp; i &lt; topN; ++i) {
+        recommendations.push_back(sortedRecs[i].first);
+    }
+    return recommendations;
+}
+
 int main() {
-    KDTree&lt;2&gt; tree;
-    tree.insert({3, 6});
-    tree.insert({2, 2});
-    tree.insert({4, 7});
-    tree.insert({1, 3});
-    tree.insert({2, 4});
-    tree.insert({5, 4});
-    tree.insert({7, 2});
-
-    cout &lt;&lt; "KD Tree structure:" &lt;&lt; endl;
-    tree.print();
-
-    array&lt;double, 2&gt; searchPoint = {2, 4};
-    cout &lt;&lt; "\nSearching for point (2, 4): " 
-         &lt;&lt; (tree.search(searchPoint) ? "Found" : "Not found") &lt;&lt; endl;
-
-    searchPoint = {6, 3};
-    cout &lt;&lt; "Searching for point (6, 3): " 
-         &lt;&lt; (tree.search(searchPoint) ? "Found" : "Not found") &lt;&lt; endl;
-
+    auto recs = recommendProducts("User1");
+    std::cout &lt;&lt; "Recommended products for User1:\n";
+    for (const auto&amp; p : recs) {
+        std::cout &lt;&lt; "- " &lt;&lt; p &lt;&lt; "\n";
+    }
     return 0;
 }
   </code></pre>
+
       <div class="complexity-card">
         <h3 class="card-title">Time Complexity</h3>
         <table class="complexity-table">
           <thead>
             <tr>
               <th>Operation</th>
-              <th>Complexity</th>
+              <th>Average</th>
+              <th>Worst Case</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Search</td>
-              <td>O(log n)</td>
+              <td>O(1)</td>
+              <td>O(n)</td>
             </tr>
             <tr>
               <td>Insert</td>
-              <td>O(log n)</td>
+              <td>O(1)</td>
+              <td>O(n)</td>
             </tr>
             <tr>
               <td>Delete</td>
-              <td>O(log n)</td>
+              <td>O(1)</td>
+              <td>O(n)</td>
             </tr>
           </tbody>
         </table>
@@ -437,26 +411,26 @@ int main() {
         <ul class="reference-list">
           <li>
             <a
-              href="https://medium.com/smucs/a-look-into-k-dimensional-trees-290ec69dffe9"
+              href="https://medium.com/@saniul.cse.just/hash-maps-algorithm-the-secret-behind-high-performance-data-management-with-c-asp-net-929208dc89da"
               target="_blank"
               class="reference-link"
-              >https://medium.com/smucs/a-look-into-k-dimensional-trees-290ec69dffe9</a
+              >https://medium.com/@saniul.cse.just/hash-maps-algorithm-the-secret-behind-high-performance-data-management-with-c-asp-net-929208dc89da</a
             >
           </li>
           <li>
             <a
-              href="https://en.wikipedia.org/wiki/K-d_tree"
+              href="https://en.wikipedia.org/wiki/Hash_table"
               target="_blank"
               class="reference-link"
-              >https://en.wikipedia.org/wiki/K-d_tree</a
+              >https://en.wikipedia.org/wiki/Hash_table</a
             >
           </li>
         </ul>
       </div>
 
       <div class="case-study-navigation">
-        <a href="case-1.html" class="nav-link">← Previous Case Study</a>
-        <a href="case-3.html" class="nav-link">Next Case Study →</a>
+        <a href="case-7.html" class="nav-link">← Previous Case Study</a>
+        <a href="case-9.html" class="nav-link">Next Case Study →</a>
       </div>
     </section>
   </body>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Case-Study2</title>
+    <title>Case-Study1</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -275,7 +275,7 @@
               >Case studies</a
             >
           </li>
-          <li><a href="../index.html/#contact" class="menu-btn">Details</a></li>
+          <li><a href="#contact" class="menu-btn">Details</a></li>
         </ul>
         <div class="menu-btn">
           <i class="fas fa-bars"></i>
@@ -285,114 +285,118 @@
 
     <section id="case-studies-section" class="case-study-container">
       <h2 class="case-study-title">
-        <i class="fas fa-briefcase"></i> Data Clustering Products into
-        Categories
+        
+        <i class="fas fa-briefcase"></i>
+        Autocorrect the Search Query
       </h2>
+
       <h2 class="case-study-title">
-        <i class="fas fa-check-circle"></i> 1.KD Tress
+        <i class="fas fa-check-circle"></i> 1. BK-Tree (Burkhard-Keller Tree)
       </h2>
 
       <p class="case-study-text">
-        KD-Trees can be used in product filtering and browsing to quickly find
-        and group similar products based on numerical features (e.g., price,
-        rating, vector embeddings). They optimize search operations by reducing
-        the time to locate relevant products within large datasets.
+        A BK-Tree is a specialized data structure designed to quickly find words
+        that are close to a given query based on edit distance. It is useful for
+        autocorrect because it efficiently retrieves candidate words that differ
+        by only a few characters from the misspelled input. This helps
+        e-commerce search engines suggest correct product names even when users
+        make typing errors.
       </p>
       <img
-        src="../images/case-2.jpg"
+        src="../images/case-6.png"
         alt="Case study visual"
         class="case-study-image"
+        height="400px"
       />
 
       <h2>Code:</h2>
       <pre class="code-block"><code>
-#include &lt;iostream&gt;
-#include &lt;array&gt;
-#include &lt;cmath&gt;
+#include "bits/stdc++.h"
 using namespace std;
 
-template &lt;size_t K&gt;
-class KDTree {
-private:
-    struct Node {
-        array&lt;double, K&gt; point;
-        Node* left;
-        Node* right;
-        Node(const array&lt;double, K&gt;&amp; pt) : point(pt), left(nullptr), right(nullptr) {}
-    };
+#define MAXN 100
+#define TOL 2
+#define LEN 10
 
-    Node* root;
-
-    Node* insertRecursive(Node* node, const array&lt;double, K&gt;&amp; point, int depth) {
-        if (node == nullptr) return new Node(point);
-        int cd = depth % K;
-        if (point[cd] &lt; node-&gt;point[cd])
-            node-&gt;left = insertRecursive(node-&gt;left, point, depth + 1);
-        else
-            node-&gt;right = insertRecursive(node-&gt;right, point, depth + 1);
-        return node;
+struct Node {
+    string word;
+    int next[2*LEN];
+    Node(string x):word(x) {
+        for(int i=0; i&lt;2*LEN; i++) next[i] = 0;
     }
-
-    bool searchRecursive(Node* node, const array&lt;double, K&gt;&amp; point, int depth) const {
-        if (node == nullptr) return false;
-        if (node-&gt;point == point) return true;
-        int cd = depth % K;
-        if (point[cd] &lt; node-&gt;point[cd])
-            return searchRecursive(node-&gt;left, point, depth + 1);
-        else
-            return searchRecursive(node-&gt;right, point, depth + 1);
-    }
-
-    void printRecursive(Node* node, int depth) const {
-        if (node == nullptr) return;
-        for (int i = 0; i &lt; depth; i++) cout &lt;&lt; "  ";
-        cout &lt;&lt; "(";
-        for (size_t i = 0; i &lt; K; i++) {
-            cout &lt;&lt; node-&gt;point[i];
-            if (i &lt; K - 1) cout &lt;&lt; ", ";
-        }
-        cout &lt;&lt; ")" &lt;&lt; endl;
-        printRecursive(node-&gt;left, depth + 1);
-        printRecursive(node-&gt;right, depth + 1);
-    }
-
-public:
-    KDTree() : root(nullptr) {}
-
-    void insert(const array&lt;double, K&gt;&amp; point) {
-        root = insertRecursive(root, point, 0);
-    }
-
-    bool search(const array&lt;double, K&gt;&amp; point) const {
-        return searchRecursive(root, point, 0);
-    }
-
-    void print() const {
-        printRecursive(root, 0);
-    }
+    Node() {}
 };
 
+Node RT;
+Node tree[MAXN];
+int ptr;
+
+int min(int a, int b, int c) {
+    return min(a, min(b, c));
+}
+
+int editDistance(string&amp; a,string&amp; b) {
+    int m = a.length(), n = b.length();
+    int dp[m+1][n+1];
+    for (int i=0; i&lt;=m; i++) dp[i][0] = i;
+    for (int j=0; j&lt;=n; j++) dp[0][j] = j;
+    for (int i=1; i&lt;=m; i++) {
+        for (int j=1; j&lt;=n; j++) {
+            if (a[i-1] != b[j-1])
+                dp[i][j] = min(1+dp[i-1][j], 1+dp[i][j-1], 1+dp[i-1][j-1]);
+            else
+                dp[i][j] = dp[i-1][j-1];
+        }
+    }
+    return dp[m][n];
+}
+
+void add(Node&amp; root,Node&amp; curr) {
+    if (root.word == "" ) {
+        root = curr;
+        return;
+    }
+    int dist = editDistance(curr.word,root.word);
+    if (tree[root.next[dist]].word == "") {
+        ptr++;
+        tree[ptr] = curr;
+        root.next[dist] = ptr;
+    } else {
+        add(tree[root.next[dist]],curr);
+    }
+}
+
+vector&lt;string&gt; getSimilarWords(Node&amp; root,string&amp; s) {
+    vector&lt;string&gt; ret;
+    if (root.word == "") return ret;
+    int dist = editDistance(root.word,s);
+    if (dist &lt;= TOL) ret.push_back(root.word);
+    int start = dist - TOL;
+    if (start &lt; 0) start = 1;
+    while (start &lt;= dist + TOL) {
+        vector&lt;string&gt; tmp = getSimilarWords(tree[root.next[start]],s);
+        for (auto i : tmp) ret.push_back(i);
+        start++;
+    }
+    return ret;
+}
+
 int main() {
-    KDTree&lt;2&gt; tree;
-    tree.insert({3, 6});
-    tree.insert({2, 2});
-    tree.insert({4, 7});
-    tree.insert({1, 3});
-    tree.insert({2, 4});
-    tree.insert({5, 4});
-    tree.insert({7, 2});
-
-    cout &lt;&lt; "KD Tree structure:" &lt;&lt; endl;
-    tree.print();
-
-    array&lt;double, 2&gt; searchPoint = {2, 4};
-    cout &lt;&lt; "\nSearching for point (2, 4): " 
-         &lt;&lt; (tree.search(searchPoint) ? "Found" : "Not found") &lt;&lt; endl;
-
-    searchPoint = {6, 3};
-    cout &lt;&lt; "Searching for point (6, 3): " 
-         &lt;&lt; (tree.search(searchPoint) ? "Found" : "Not found") &lt;&lt; endl;
-
+    string dictionary[] = {"hell","help","shell","smell","fell","felt","oops","pop","oouch","halt"};
+    ptr = 0;
+    int sz = sizeof(dictionary)/sizeof(string);
+    for(int i=0; i&lt;sz; i++) {
+        Node tmp = Node(dictionary[i]);
+        add(RT,tmp);
+    }
+    string w1 = "ops";
+    string w2 = "helt";
+    vector&lt;string&gt; match = getSimilarWords(RT,w1);
+    cout &lt;&lt; "similar words in dictionary for : " &lt;&lt; w1 &lt;&lt; ":\n";
+    for (auto x : match) cout &lt;&lt; x &lt;&lt; endl;
+    match = getSimilarWords(RT,w2);
+    cout &lt;&lt; "Correct words in dictionary for " &lt;&lt; w2 &lt;&lt; ":\n";
+    for (auto x : match) cout &lt;&lt; x &lt;&lt; endl;
     return 0;
 }
   </code></pre>
@@ -402,32 +406,37 @@ int main() {
           <thead>
             <tr>
               <th>Operation</th>
-              <th>Complexity</th>
+              <th>Worst-Case</th>
+              <th>Average-Case</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Search</td>
-              <td>O(log n)</td>
+              <td>Insertion</td>
+              <td>O(N² * m * n)</td>
+              <td>O(N log N * m * n)</td>
             </tr>
             <tr>
-              <td>Insert</td>
-              <td>O(log n)</td>
+              <td>Querying</td>
+              <td>O(N * m * n) </td>
+              <td>O(log N * m * n) </td>
             </tr>
             <tr>
-              <td>Delete</td>
-              <td>O(log n)</td>
+              <td>Edit distance</td>
+              <td>O(m * n)</td>
+              <td>-</td>
             </tr>
           </tbody>
         </table>
       </div>
+
 
       <div class="complexity-card">
         <h3 class="card-title">Space Complexity</h3>
         <table class="complexity-table">
           <tr>
             <td>Space</td>
-            <td>O(n)</td>
+            <td>O(N * (word size + 2 * LEN))</td>
           </tr>
         </table>
       </div>
@@ -436,27 +445,17 @@ int main() {
         <h3 class="reference-title">References</h3>
         <ul class="reference-list">
           <li>
-            <a
-              href="https://medium.com/smucs/a-look-into-k-dimensional-trees-290ec69dffe9"
-              target="_blank"
-              class="reference-link"
-              >https://medium.com/smucs/a-look-into-k-dimensional-trees-290ec69dffe9</a
-            >
+            <a href="https://www.geeksforgeeks.org/bk-tree-introduction-implementation/" target="_blank" class="reference-link">https://www.geeksforgeeks.org/bk-tree-introduction-implementation/</a>
           </li>
           <li>
-            <a
-              href="https://en.wikipedia.org/wiki/K-d_tree"
-              target="_blank"
-              class="reference-link"
-              >https://en.wikipedia.org/wiki/K-d_tree</a
-            >
+            <a href="https://www.ijates.com/images/short_pdf/1493526920_IETE224ijates.pdf" target="_blank" class="reference-link">https://www.ijates.com/images/short_pdf/1493526920_IETE224ijates.pdf</a>
           </li>
         </ul>
       </div>
 
       <div class="case-study-navigation">
-        <a href="case-1.html" class="nav-link">← Previous Case Study</a>
-        <a href="case-3.html" class="nav-link">Next Case Study →</a>
+        <a href="case-5.html" class="nav-link">← Previous Case Study</a>
+        <a href="case-7.html" class="nav-link">Next Case Study →</a>
       </div>
     </section>
   </body>
