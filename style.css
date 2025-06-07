@@ -411,7 +411,7 @@ section .title::after {
 .services .serv-content .card:hover {
     background: #7e57c2;
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(126, 87, 194, 0.4);
+    box-shadow: 0 15px 30px rgba(238, 237, 241, 0.4);
 }
 
 .services .serv-content .card .box {
@@ -461,7 +461,7 @@ section .title::after {
 }
 
 .github-link:hover {
-  color: #4078c0; /* GitHub blue */
+  color: #f3f4f5; /* GitHub blue */
 }
 
 /* skills section styling */

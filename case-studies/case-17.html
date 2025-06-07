@@ -223,6 +223,43 @@
       .complexity-table tr:nth-child(even) {
         background-color: #2e2e2e;
       }
+      .quote-card {
+        background-color: #1e1e1e;
+        border-left: 5px solid #bb86fc;
+        padding: 25px 30px;
+        margin: 60px auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .quote-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(187, 134, 252, 0.3);
+      }
+
+      .quote-text {
+        font-size: 22px;
+        font-style: italic;
+        color: #e0e0e0;
+        line-height: 1.7;
+        position: relative;
+      }
+
+      .quote-text i {
+        color: #bb86fc;
+        font-size: 20px;
+        margin-right: 10px;
+      }
+
+      .quote-author {
+        font-size: 16px;
+        color: #bb86fc;
+        font-weight: 500;
+        margin-top: 15px;
+      }
     </style>
   </head>
   <body>
@@ -248,136 +285,137 @@
 
     <section id="case-studies-section" class="case-study-container">
       <h2 class="case-study-title">
-        <i class="fas fa-briefcase"></i> Indexing New Products
+        <i class="fas fa-briefcase"></i>
+        Order Dependency Management
       </h2>
 
       <h2 class="case-study-title">
-        <i class="fas fa-check-circle"></i> 1.Long Structured Merge(LSM) Trees
+        <i class="fas fa-check-circle"></i> 1.Topological Sort
       </h2>
 
       <p class="case-study-text">
-        LSM trees can be used for indexing products by buffering writes in
-        memory and flushing them to disk in sorted files. They support high
-        write throughput and efficient range queries, making them ideal for
-        dynamic product catalogs.
+        Topological Sort can be used in Order Dependency Management to determine
+        the correct sequence of processing orders that depend on each other.
+        Each order or task is represented as a node in a directed graph, where
+        edges indicate dependencies (i.e., one order must be completed before
+        another starts). By applying topological sort on the graph, we can get a
+        linear ordering of orders that respects all dependencies, ensuring that
+        no order is processed before its prerequisites are completed
       </p>
       <img
-        src="../images/case-1.jpg"
+        src="../images/case-16.png"
         alt="Case study visual"
         class="case-study-image"
       />
 
       <h2>Code:</h2>
       <pre class="code-block"><code>
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;map&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-#include &lt;filesystem&gt;
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
 
-class SSTable {
-public:
-    std::string filename;
-
-    SSTable(const std::map&lt;std::string, std::string&gt;&amp; data, const std::string&amp; fname)
-        : filename(fname) {
-        std::ofstream file(filename);
-        for (const auto&amp; pair : data) {
-            file &lt;&lt; pair.first &lt;&lt; ":" &lt;&lt; pair.second &lt;&lt; "\n";
+class Solution
+{
+    public:
+    //Function to return list containing vertices in Topological order.
+    void dfs(int start, vector&lt;int&gt; adj[], vector&lt;bool&gt; &vis, stack&lt;int&gt; &s)
+    {
+        vis[start] = true;
+        for (auto it : adj[start])
+        {
+            if (!vis[it])
+                dfs(it, adj, vis, s);
         }
+        s.push(start);
     }
 
-    std::string get(const std::string&amp; key) {
-        std::ifstream file(filename);
-        std::string line;
-        while (getline(file, line)) {
-            size_t sep = line.find(":");
-            if (sep != std::string::npos) {
-                std::string k = line.substr(0, sep);
-                std::string v = line.substr(sep + 1);
-                if (k == key) return v;
+    vector&lt;int&gt; topoSort(int V, vector&lt;int&gt; adj[])
+    {
+        vector&lt;bool&gt; vis(V, false);
+        vector&lt;int&gt; ans;
+        stack&lt;int&gt; s;
+
+        for (int i = 0; i &lt; V; i++)
+        {
+            if (!vis[i])
+            {
+                dfs(i, adj, vis, s);
             }
         }
-        return ""; // Not found
+
+        while (!s.empty())
+        {
+            ans.push_back(s.top());
+            s.pop();
+        }
+        return ans;
     }
 };
 
-class LSMTree {
-    std::map&lt;std::string, std::string&gt; memTable;
-    std::vector&lt;SSTable&gt; sstables;
-    const size_t memTableLimit = 5;
-    int sstableCounter = 0;
+int check(int V, vector &lt;int&gt; &res, vector&lt;int&gt; adj[])
+{
+    if (V != res.size())
+        return 0;
 
-    void flushMemTableToSSTable() {
-        std::string filename = "sstable_" + std::to_string(sstableCounter++) + ".txt";
-        SSTable sstable(memTable, filename);
-        sstables.push_back(sstable);
-        memTable.clear();
+    vector&lt;int&gt; map(V, -1);
+    for (int i = 0; i &lt; V; i++)
+    {
+        map[res[i]] = i;
     }
-
-public:
-    void put(const std::string&amp; key, const std::string&amp; value) {
-        memTable[key] = value;
-        if (memTable.size() &gt;= memTableLimit) {
-            flushMemTableToSSTable();
+    for (int i = 0; i &lt; V; i++)
+    {
+        for (int v : adj[i])
+        {
+            if (map[i] &gt; map[v])
+                return 0;
         }
     }
+    return 1;
+}
 
-    std::string get(const std::string&amp; key) {
-        if (memTable.find(key) != memTable.end()) {
-            return memTable[key];
+int main()
+{
+    int T;
+    cin &gt;&gt; T;
+    while (T--)
+    {
+        int N, E;
+        cin &gt;&gt; E &gt;&gt; N;
+        int u, v;
+
+        vector&lt;int&gt; adj[N];
+
+        for (int i = 0; i &lt; E; i++)
+        {
+            cin &gt;&gt; u &gt;&gt; v;
+            adj[u].push_back(v);
         }
 
-        // Search in SSTables from newest to oldest
-        for (auto it = sstables.rbegin(); it != sstables.rend(); ++it) {
-            std::string result = it-&gt;get(key);
-            if (!result.empty()) return result;
-        }
+        Solution obj;
+        vector &lt;int&gt; res = obj.topoSort(N, adj);
 
-        return "Not Found";
+        cout &lt;&lt; check(N, res, adj) &lt;&lt; endl;
     }
-};
-
-int main() {
-    LSMTree tree;
-    tree.put("apple", "red");
-    tree.put("banana", "yellow");
-    tree.put("cherry", "dark red");
-    tree.put("date", "brown");
-    tree.put("elderberry", "black");  // This will trigger flush
-    tree.put("fig", "purple");
-
-    std::cout &lt;&lt; "Get 'banana': " &lt;&lt; tree.get("banana") &lt;&lt; "\n";
-    std::cout &lt;&lt; "Get 'fig': " &lt;&lt; tree.get("fig") &lt;&lt; "\n";
-    std::cout &lt;&lt; "Get 'kiwi': " &lt;&lt; tree.get("kiwi") &lt;&lt; "\n";
 
     return 0;
 }
-
-
   </code></pre>
       <div class="complexity-card">
-        <h3 class="card-title">Time Complexity</h3>
+        <h3 class="card-title">Efficiency Analysis</h3>
         <table class="complexity-table">
           <thead>
             <tr>
-              <th>Operation</th>
               <th>Complexity</th>
+              <th>Value</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Read time</td>
-              <td>O(log(N))</td>
+              <td>Time Complexity</td>
+              <td>O(V+E)</td>
             </tr>
             <tr>
-              <td>Write time</td>
-              <td>O(1)</td>
-            </tr>
-            <tr>
-              <td>Delete time</td>
-              <td>O(log(N))</td>
+              <td>Space Complexity</td>
+              <td>O(V+E)</td>
             </tr>
           </tbody>
         </table>
@@ -388,26 +426,26 @@ int main() {
         <ul class="reference-list">
           <li>
             <a
-              href="https://en.wikipedia.org/wiki/Log-structured_merge-tree"
+              href="https://www.geeksforgeeks.org/topological-sorting/"
               target="_blank"
               class="reference-link"
-              >https://en.wikipedia.org/wiki/Log-structured_merge-tree</a
+              >https://www.geeksforgeeks.org/topological-sorting/</a
             >
           </li>
           <li>
             <a
-              href="https://www.cs.umb.edu/~poneil/lsmtree.pdf"
+              href="https://en.wikipedia.org/wiki/Topological_sorting"
               target="_blank"
               class="reference-link"
-              >https://www.cs.umb.edu/~poneil/lsmtree.pdf</a
+              >https://en.wikipedia.org/wiki/Topological_sorting</a
             >
           </li>
         </ul>
       </div>
 
       <div class="case-study-navigation">
-        <a></a>
-        <a href="case-2.html" class="nav-link">Next Case Study →</a>
+        <a href="case-16.html" class="nav-link">← Previous Case Study</a>
+        <a href="case-18.html" class="nav-link">Next Case Study →</a>
       </div>
     </section>
   </body>

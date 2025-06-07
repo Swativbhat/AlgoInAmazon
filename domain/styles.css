@@ -17,24 +17,24 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: #1a1a1a;
+  background: #1a1a1a;
 }
 ::-webkit-scrollbar-thumb {
-    background: #7e57c2;
-    border-radius: 5px;
+  background: #7e57c2;
+  border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #9575cd;
+  background: #9575cd;
 }
 /* navbar styling */
 .navbar {
   position: fixed;
   width: 100%;
   z-index: 999;
-  padding: 30px 0;
+  padding: 26px 0;
   font-family: "Ubuntu", sans-serif;
   transition: all 0.3s ease;
   background-color: rgba(18, 18, 18, 0.9);
@@ -111,7 +111,7 @@ body {
 
 /* domain description */
 .domain-section {
-  background-color: #121212;
+  background-color: #000;
   padding: 80px 20px;
   display: flex;
   justify-content: center;
@@ -120,7 +120,7 @@ body {
 .domain-section .content {
   margin-top: 100px;
   max-width: 800px;
-  background-color: #121212; /* dark background for paragraph */
+  background-color: #1e1e1e; /* dark background for paragraph */
   padding: 30px;
   border-radius: 12px;
   text-align: center;
@@ -150,30 +150,8 @@ body {
   background-color: #000;
   padding: 60px 20px;
   display: flex;
-  justify-content: center;
-}
-
-.intro-container {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  max-width: 1500px;
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; /* stack heading and container vertically */
   align-items: center;
-  gap: 30px;
-  padding: 40px;
-}
-
-.intro-image img {
-  max-width: 900px;
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
-  margin-left: 250px;
-}
-
-.intro-text {
-  flex: 1;
 }
 
 .intro-text h2 {
@@ -181,10 +159,34 @@ body {
   font-size: 2em;
   margin-bottom: 20px;
   font-weight: 600;
-  margin-left: 450px;
+  text-align: center;
+  margin: 0 auto; /* center the heading */
 }
 
-.intro-section p {
+.intro-container {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: nowrap; /* keep image and paragraph in the same row */
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.intro-image img {
+  max-width: 400px; /* more reasonable size */
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+  margin-left: 0; /* remove excessive margin */
+}
+
+.intro-paragraph {
+  flex: 1; /* let paragraph take remaining space */
+}
+
+.intro-paragraph p {
   font-size: 1.1em;
   line-height: 1.6;
   font-weight: 400;
@@ -201,6 +203,38 @@ body {
   .intro-image img {
     margin-bottom: 20px;
   }
+}
+
+.intro-section {
+  background-color: #000;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* architecture  */
+
+.content-container {
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 12px;
+  background-color: #1e1e1e;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+  text-align: center;
+}
+
+.section-heading {
+  color: #bb86fc;
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.section-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
 /* Objectives Section */
@@ -277,7 +311,7 @@ body {
   color: #bb86fc;
   margin-bottom: 20px;
   font-weight: 900;
-  text-decoration:double;
+  text-decoration: double;
 }
 
 .case-card {
@@ -287,18 +321,17 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.case-card h4{
-color: rgb(243, 245, 255);
-font-size:1.2em ;
+.case-card h4 {
+  color: rgb(243, 245, 255);
+  font-size: 1.2em;
 }
 
 .case-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
-   background-color: #bb86fc;
+  background-color: #bb86fc;
   cursor: pointer;
 }
-
 
 .case-card:hover h3,
 .case-card:hover p,
@@ -318,8 +351,45 @@ font-size:1.2em ;
   line-height: 1.6;
 }
 
-.case-card a{
+.case-card a {
   font-size: 1em;
   color: #cccccc;
   line-height: 1.6;
+}
+
+.complexity-card {
+
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+  font-size: 20px;
+  color: #bb86fc;
+  margin-bottom: 15px;
+}
+
+.complexity-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e0e0e0;
+  font-size: 16px;
+}
+
+.complexity-table th,
+.complexity-table td {
+  padding: 12px 15px;
+  border: 1px solid #444;
+  text-align: left;
+}
+
+.complexity-table th {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.complexity-table tr:nth-child(even) {
+  background-color: #2e2e2e;
 }
